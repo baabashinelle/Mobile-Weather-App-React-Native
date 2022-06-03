@@ -6,7 +6,7 @@ import { FontAwesome } from "@expo/vector-icons";
 const Searchbar = () => {
   return (
     <View
-      style={tw`p-4 w-full bg-[#FDFCFC] rounded-xl items-center flex flex-row justify-between`}
+      style={tw`p-3 w-full bg-[#FDFCFC] rounded-xl items-center flex flex-row justify-between`}
     >
       <TextInput
         placeholder="Search Location"

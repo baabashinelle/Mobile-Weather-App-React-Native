@@ -1,18 +1,19 @@
-
 import { SafeAreaView } from "react-native";
 import { ScrollView } from "react-native";
 import Searchbar from './Components/Searchbar';
 import tw from "twrnc";
 import WeatherImages from "./Components/WeatherImages";
 import Temperature from "./Components/Temperature";
+import WeatherWidget from "./Components/WeatherWidget";
 
 export default function App() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={tw`bg-[#ffff]`}>
       <ScrollView style={tw`px-6`}>
         <Searchbar />
-        <WeatherImages/>
-        <Temperature/>
+        <WeatherImages />
+        <Temperature />
+        <WeatherWidget/>
       </ScrollView>
     </SafeAreaView>
   );
