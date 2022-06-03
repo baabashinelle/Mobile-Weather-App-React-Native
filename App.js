@@ -5,6 +5,7 @@ import tw from "twrnc";
 import WeatherImages from "./Components/WeatherImages";
 import Temperature from "./Components/Temperature";
 import WeatherWidget from "./Components/WeatherWidget";
+import WarningWidget from "./Components/WarningWidget";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <WeatherImages />
         <Temperature />
         <WeatherWidget/>
+        <WarningWidget/>
       </ScrollView>
     </SafeAreaView>
   );
