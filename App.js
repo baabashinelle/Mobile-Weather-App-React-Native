@@ -36,7 +36,7 @@ export default function App() {
         console.log(data);
       } catch (error) {
         console.log(error)
-        console.log("Error! Invalid input")
+        console.log("Error! Incomplete input")
       }
     }
   }
