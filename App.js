@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   SafeAreaView,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 import { FontAwesome } from "@expo/vector-icons";
@@ -12,37 +13,42 @@ import WeatherImages from "./Components/WeatherImages";
 import Temperature from "./Components/Temperature";
 import WeatherWidget from "./Components/WeatherWidget";
 import WarningWidget from "./Components/WarningWidget";
-import axios from "axios"
-
+import axios from "axios";
 
 export default function App() {
+  const [town, setTown] = useState("");
+  const [dataFetched, setdataFetched] = useState(false);
+  const [townRes, setTownRes] = useState("");
+  const [temp, setTemp] = useState("");
 
-  const [town, setTown] = useState("")
-
-  
   const getWeatherData = async () => {
-    if (town === ""){
+        try {
+          const res = await axios.get(
+            `https://api.openweathermap.org/data/2.5/weather?q=${town}&appid=d467205cb02234512d5a273cb405f713&units=metric`
+            );
+            const data = await res.data;
+            setTownRes(data.name);
+            setTemp(data.main.temp.toFixed(0));
+            setdataFetched(true)
+            Keyboard.dismiss();
+          } catch (error) {
+            console.log(error);
+            console.log("Error! Incomplete input");
+          }
+  };
+
+  const defaultWeather = async () => {
+    if (!dataFetched) {
       const res = await axios.get(
-        "https://api.openweathermap.org/data/2.5/weather?q=accra&appid=d467205cb02234512d5a273cb405f713"
+        "https://api.openweathermap.org/data/2.5/weather?q=accra&appid=d467205cb02234512d5a273cb405f713&units=metric"
       );
-      const data = await res.data
-      console.log(data);
-    } else {
-      try {
-        const res = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${town}&appid=d467205cb02234512d5a273cb405f713`
-        );
-        const data = await res.data;
-        console.log(data);
-      } catch (error) {
-        console.log(error)
-        console.log("Error! Incomplete input")
-      }
+      const data = await res.data;
+      setTownRes(data.name);
+      setTemp(data.main.temp.toFixed(0));
     }
   }
 
-  getWeatherData()
-  
+  defaultWeather();
 
   return (
     <SafeAreaView style={tw`bg-[#ffff]`}>
@@ -62,11 +68,10 @@ export default function App() {
           </TouchableOpacity>
         </View>
         <WeatherImages />
-        <Temperature />
+        <Temperature town={townRes} temp={temp} />
         <WeatherWidget />
         <WarningWidget />
       </ScrollView>
     </SafeAreaView>
   );
 }
-
