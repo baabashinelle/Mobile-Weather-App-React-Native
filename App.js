@@ -20,6 +20,11 @@ export default function App() {
   const [dataFetched, setdataFetched] = useState(false);
   const [townRes, setTownRes] = useState("");
   const [temp, setTemp] = useState("");
+  const [description, setDescription] = useState("");
+  const [humidity, setHumidity] = useState("");
+  const [wind, setWind] = useState("");
+  const [pressure, setPressure] = useState("");
+  const [country, setCountry] = useState("");
 
   const getWeatherData = async () => {
         try {
@@ -27,8 +32,13 @@ export default function App() {
             `https://api.openweathermap.org/data/2.5/weather?q=${town}&appid=d467205cb02234512d5a273cb405f713&units=metric`
             );
             const data = await res.data;
+            setDescription(data.weather[0].description);
             setTownRes(data.name);
             setTemp(data.main.temp.toFixed(0));
+            setHumidity(data.main.humidity);
+            setWind(data.wind.speed);
+            setPressure(data.main.pressure);
+            setCountry(data.sys.country);
             setdataFetched(true)
             Keyboard.dismiss();
           } catch (error) {
@@ -43,8 +53,13 @@ export default function App() {
         "https://api.openweathermap.org/data/2.5/weather?q=accra&appid=d467205cb02234512d5a273cb405f713&units=metric"
       );
       const data = await res.data;
+      setDescription(data.weather[0].description);
       setTownRes(data.name);
       setTemp(data.main.temp.toFixed(0));
+      setHumidity(data.main.humidity);
+      setWind(data.wind.speed);
+      setPressure(data.main.pressure);
+      setCountry(data.sys.country);
     }
   }
 
@@ -70,8 +85,8 @@ export default function App() {
           </TouchableOpacity>
         </View>
         <WeatherImages />
-        <Temperature town={townRes} temp={temp} />
-        <WeatherWidget />
+        <Temperature town={townRes} temp={temp} description={description}/>
+        <WeatherWidget humidity={humidity} wind={wind} pressure={pressure} country={country}/>
         <WarningWidget />
       </ScrollView>
     </SafeAreaView>
