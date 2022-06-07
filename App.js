@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Keyboard,
 } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import tw from "twrnc";
 import WeatherImages from "./Components/WeatherImages";
@@ -48,7 +48,9 @@ export default function App() {
     }
   }
 
-  defaultWeather();
+  useEffect(() => {
+    defaultWeather();
+  }, [town])
 
   return (
     <SafeAreaView style={tw`bg-[#ffff]`}>
