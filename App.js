@@ -15,18 +15,19 @@ import WeatherWidget from "./Components/WeatherWidget";
 import WarningWidget from "./Components/WarningWidget";
 import axios from "axios";
 
+
 export default function App() {
   const [town, setTown] = useState("");
   const [dataFetched, setdataFetched] = useState(false);
   const [townRes, setTownRes] = useState("");
   const [temp, setTemp] = useState("");
-  const [description, setDescription] = useState("");
-  const [humidity, setHumidity] = useState("");
-  const [wind, setWind] = useState("");
-  const [pressure, setPressure] = useState("");
-  const [country, setCountry] = useState("");
-  const [max, setMax] = useState("");
-  const [min, setMin] = useState("");
+  const [description, setDescription] = useState(null);
+  const [humidity, setHumidity] = useState(null);
+  const [wind, setWind] = useState(null);
+  const [pressure, setPressure] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [max, setMax] = useState(null);
+  const [min, setMin] = useState(null);
 
   const getWeatherData = async () => {
     try {
