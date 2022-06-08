@@ -75,7 +75,7 @@ export default function App() {
 
 
   return (
-    <SafeAreaView style={tw`bg-[#ffff]`}>
+    <SafeAreaView style={tw`bg-gray-200 h-[100%]`}>
       <ScrollView style={tw`px-6`}>
         <View
           style={tw`p-3 w-full bg-[#FDFCFC] rounded-xl items-center flex flex-row justify-between`}
