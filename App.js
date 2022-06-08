@@ -25,26 +25,30 @@ export default function App() {
   const [wind, setWind] = useState("");
   const [pressure, setPressure] = useState("");
   const [country, setCountry] = useState("");
+  const [max, setMax] = useState("");
+  const [min, setMin] = useState("");
 
   const getWeatherData = async () => {
-        try {
-          const res = await axios.get(
-            `https://api.openweathermap.org/data/2.5/weather?q=${town}&appid=d467205cb02234512d5a273cb405f713&units=metric`
-            );
-            const data = await res.data;
-            setDescription(data.weather[0].description);
-            setTownRes(data.name);
-            setTemp(data.main.temp.toFixed(0));
-            setHumidity(data.main.humidity);
-            setWind(data.wind.speed);
-            setPressure(data.main.pressure);
-            setCountry(data.sys.country);
-            setdataFetched(true)
-            Keyboard.dismiss();
-          } catch (error) {
-            console.log(error);
-            console.log("Error! Incomplete input");
-          }
+    try {
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${town}&appid=d467205cb02234512d5a273cb405f713&units=metric`
+      );
+      const data = await res.data;
+      setDescription(data.weather[0].description);
+      setTownRes(data.name);
+      setTemp(data.main.temp.toFixed(0));
+      setHumidity(data.main.humidity);
+      setWind(data.wind.speed);
+      setPressure(data.main.pressure);
+      setCountry(data.sys.country);
+      setMax(data.main.temp_max);
+      setMin(data.main.temp_min);
+      setdataFetched(true);
+      Keyboard.dismiss();
+    } catch (error) {
+      console.log(error);
+      console.log("Error! Incomplete input");
+    }
   };
 
   const defaultWeather = async () => {
@@ -60,12 +64,15 @@ export default function App() {
       setWind(data.wind.speed);
       setPressure(data.main.pressure);
       setCountry(data.sys.country);
+      setMax(data.main.temp_max);
+      setMin(data.main.temp_min);
     }
-  }
+  };
 
   useEffect(() => {
     defaultWeather();
-  }, [town])
+  }, [town]);
+
 
   return (
     <SafeAreaView style={tw`bg-[#ffff]`}>
@@ -84,10 +91,15 @@ export default function App() {
             </View>
           </TouchableOpacity>
         </View>
-        <WeatherImages />
-        <Temperature town={townRes} temp={temp} description={description}/>
-        <WeatherWidget humidity={humidity} wind={wind} pressure={pressure} country={country}/>
-        <WarningWidget />
+        <WeatherImages temp={temp}/>
+        <Temperature town={townRes} temp={temp} description={description} />
+        <WeatherWidget
+          humidity={humidity}
+          wind={wind}
+          pressure={pressure}
+          country={country}
+        />
+        <WarningWidget max={max} min={min}/>
       </ScrollView>
     </SafeAreaView>
   );
