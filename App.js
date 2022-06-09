@@ -79,20 +79,23 @@ export default function App() {
     <SafeAreaView style={tw`bg-gray-200 h-[100%]`}>
       <ScrollView style={tw`px-6`}>
         <View
-          style={tw`p-3 w-full bg-[#FDFCFC] rounded-xl items-center flex flex-row justify-between`}
+          style={tw`px-4 py-1 w-full bg-[#FDFCFC] rounded-xl items-center flex flex-row justify-between`}
         >
           <TextInput
             placeholder="Search Location"
-            style={tw`text-xl`}
+            style={tw`text-lg h-10`}
             onChangeText={(town) => setTown(town)}
+            keyboardType="default"
+            multiline={true}
+            textAlignVertical="top"
           />
           <TouchableOpacity onPress={getWeatherData}>
             <View>
-              <FontAwesome name="search" style={tw`text-xl text-gray-300`} />
+              <FontAwesome name="search" style={tw`text-lg text-gray-300`} />
             </View>
           </TouchableOpacity>
         </View>
-        <WeatherImages temp={temp}/>
+        <WeatherImages temp={temp} />
         <Temperature town={townRes} temp={temp} description={description} />
         <WeatherWidget
           humidity={humidity}
@@ -100,7 +103,7 @@ export default function App() {
           pressure={pressure}
           country={country}
         />
-        <WarningWidget max={max} min={min}/>
+        <WarningWidget max={max} min={min} />
       </ScrollView>
     </SafeAreaView>
   );

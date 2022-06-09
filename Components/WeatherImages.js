@@ -7,7 +7,7 @@ import tw from "twrnc"
 const WeatherImages = ({temp}) => {
   return (
     <>
-      {temp <= 24 ? (
+      {temp <= 29 ? (
         <View style={tw`items-center pt-12 relative`}>
           <View style={tw`relative items-center pt-20 pl-22`}>
             <Image

@@ -10,7 +10,7 @@ const Searchbar = () => {
     >
       <TextInput
         placeholder="Search Location"
-        style={tw`text-xl`}
+        style={tw`text-xl p-0`}
       />
       <View>
         <FontAwesome name="search" style={tw`text-xl text-gray-300`} />
