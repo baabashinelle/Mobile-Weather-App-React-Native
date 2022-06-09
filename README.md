@@ -1,5 +1,6 @@
 # Mobile-Weather-App-React-Native
 A repo of my first mobile app in React Native. This is a Weather App styled with Tailwind CSS. Weather Information from OpenWeatherMap.
+UI: Pavan Kamal on Figma
 
 
 
